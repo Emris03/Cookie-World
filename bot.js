@@ -73,7 +73,6 @@ client.on('message', message => {
         };
     };*/
 
-    //Only so it wont require a prefix
     if (message.content.startsWith("rip")) {
         message.channel.send(new Discord.MessageAttachment("./images/randomimages/tombstone.jpg"));
     };
