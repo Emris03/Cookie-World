@@ -1,0 +1,21 @@
+{
+    "inventory": {
+        "roboto": {
+            "Rarity": "Rare",
+            "Level": 4,
+            "Power": 15
+        },
+        "supertoy": {
+            "Rarity": "Common",
+            "Level": 9,
+            "Power": 18
+        },
+        "armything": {
+            "Rarity": "Ultra-Rare",
+            "Level": 1,
+            "Power": 26
+        }
+    },
+    "equipped1": "armything",
+    "equipped2": "supertoy"
+}
