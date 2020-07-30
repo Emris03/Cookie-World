@@ -1,0 +1,25 @@
+{"inventory" : {
+
+},
+"crewMates" : {
+
+},
+"robot" : {
+    "level" : 0
+},
+"records" : {
+    "level" : 0,
+    "rp" : 0,
+    "storyModeStage" : -1,
+
+    "timeCreated" : -1
+},
+"otherStuff" : {
+    "commandsOwned" : {
+
+    },
+    "mazeData" : {
+        
+    }
+}
+}

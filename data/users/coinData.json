@@ -1,0 +1,30 @@
+{
+    "380364910078459905": {
+        "coins": 4330,
+        "message": "(None)",
+        "inventory": {
+            "cookies": 114,
+            "tonks": 1,
+            "ducttape": 1,
+            "longarm": 1
+        },
+        "bank": {
+            "amount": 0,
+            "lastInteract": 1595516836040
+        }
+    },
+    "702275663197110332": {
+        "coins": 0,
+        "message": "(None)",
+        "inventory": {
+            "cookies": 1,
+            "tonks": 0,
+            "ducttape": 0,
+            "longarm": 0
+        },
+        "bank": {
+            "amount": 0,
+            "lastInteract": 1595857688053
+        }
+    }
+}

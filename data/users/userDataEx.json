@@ -1,0 +1,45 @@
+{"id": {
+    "inventory" : {
+        "uniquePartId" : {
+            "level" : 0,
+            "stats" : {
+                "s1" : 0,
+                "s2" : 0,
+                "s3" : 0
+            },
+            "equiped" : false
+        }
+    },
+
+    "crewMates" : {
+        "uniqueCrewMateId" : {
+            "level" : 0,
+                "stats" : {
+                    "s1" : 0,
+                    "s2" : 0,
+                    "s3" : 0
+                },
+                "equipedPos" : -1
+        }
+    },
+
+    "robot" : {
+        "level" : 0,
+        "stats" : {
+            "s1" : 0,
+            "s2" : 0,
+            "s3" : 0
+        },
+        "statMults" : {
+            "s1" : 0,
+            "s2" : 0,
+            "s3" : 0
+        }
+    },
+    "records" : {
+        "level" : 0,
+        "rp" : 0,
+        "storyModeStage" : -1
+    }
+}
+}
