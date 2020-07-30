@@ -22,7 +22,7 @@ client.on('ready', function (evt) {
     .catch(console.error);
 });
 
-//Default Variable settings45rt 
+//Default Variable settings 
 cookiePrice = 10
 tonkPrice = 100
 tapePrice = 50
@@ -49,8 +49,6 @@ client.on('message', message => {
     if(message.author.bot) {
         return;
     };
-
-
 
     //numberOfWords = message.content.split(' ')
     //numberOfCoins = parseInt(numberOfWords.length)
@@ -83,7 +81,7 @@ try{
         var cmd = args.shift();
 
 
-        switch(cmd) {
+        switch(cmd) {//all commands that start with the main prefix, in this case, "k!"
             // !ping
             case 'ping':
                 message.channel.send("Pinging ...")
@@ -115,7 +113,7 @@ try{
                 channel.send(embed)
                 break;
             case 'u':
-            channel.send("this is a wip right now.");
+                channel.send("this is a wip right now.");
                 channel.send(dataStorage(message));
                 break;
             case 'trainer':
@@ -139,11 +137,15 @@ try{
                     channel.send ("That's too much! Try a lesser number...")
                 }
                 break;
-            case 'say':
-                sayMessage = message.content.slice(6)
-                channel.send(sayMessage)
-                message.delete()
-                break;
+            case 'say'://if you add a || to a test, its basically saying "Or". 
+                if (message.author.id === "380364910078459905" || "627852058845904927"){
+                    sayMessage = message.content.slice(6)
+                    channel.send(sayMessage)
+                    message.delete()
+                    break;
+                }
+                else{message.channel.send("You don't have permission to use this command!") 
+                    break;}
 
                 //edit message by id
             case 'editmessage':
@@ -165,23 +167,27 @@ try{
                 channel.send (`Done!${mention}has been messaged!`)
                 break;
             case 'spam':
-                mention = message.mentions.users.first()
-                if (mention == null) {return;}
-                mentionMessage = message.content.slice(6)
-                let numberSpam = message.content.split(" ").slice(2).join(" ")
-                if (numberSpam > 100) {
-                    channel.send("That's too much spam! Please choose a lesser number...")
-                }
-                if (numberSpam < 101) {
-                    for (var i = 0; i < numberSpam; i++) {
-                        spamMessage(message)
+                if (message.author.id === "627852058845904927"|| message.author.id ==="380364910078459905"){
+                    mention = message.mentions.users.first()
+                    if (mention == null) {return;}
+                    mentionMessage = message.content.slice(6)
+                    let numberSpam = message.content.split(" ").slice(2).join(" ")
+                    if (numberSpam > 100) {
+                       channel.send("That's too much spam! Please choose a lesser number...")
                     }
+                    if (numberSpam < 101) {
+                        for (var i = 0; i < numberSpam; i++) {
+                            spamMessage(message)
+                        }
+                    }
+                    break;
                 }
-                break;
+                else{channel.send("You dont have permission to use this command!")
+                    break;}
 
             case '8ball':
                 var random = Math.floor (Math.random() * (9))
-                channel.send(new Discord.MessageAttachment("./randomimages/"+random+".jpg"))
+                channel.send(new Discord.MessageAttachment("./images/randomimages/"+random+".jpg"))
                 break;
 
             default:
@@ -195,7 +201,7 @@ try{
         var cmd = args.shift();
 console.log(1);
     
-        switch (cmd) {
+        switch (cmd) {//these activate if the prefix used is the cookie prefix, in this case "kc!".
             case 'clear':
                 client.clearTimeout(caraTime, 0)
                 caravanData[message.channel.id].active=0
@@ -256,6 +262,8 @@ console.log(1);
                     }
                 }
                 break;
+
+            //this command is actually pretty useless
             case 'start':
             console.log(2.6);
                 ensureUserInDB(user);
@@ -268,118 +276,7 @@ console.log(1);
                 break;
 
             
-            case 'test' :
-                console.log(2.7);
-                //let data = JSON.parse(fs.readFileSync("./data/users/coinData.json", "utf8"));
-                //let data = JSON.stringify("./data/users/fight.json")
-                //console.log(data)
-
-
-                let data = test.inventory
-                console.log(data)
-                let keys = Object.keys(data)
-                let out = ''
-                for (let i in data){
-                    console.log(JSON.stringify(i))
-                    out+="**"+i+"** | "
-                    let kData = test.inventory[i]
-                    console.log(kData)
-                    let k = data[i]
-                    console.log(k)
-                    let kKeys =Object.keys(k)
-                    for(let j in kData){
-                        console.log(JSON.stringify(j))
-                        //out+=kKeys[j]+"\n"
-                        out+=`${j}: ${kData[j]}`+" | "
-                    }
-                    console.log(kKeys)
-                    out+="\n"
-                }
-                let inventoryMessage = new Discord.MessageEmbed ()
-                    .setAuthor('Your Inventory:')
-                    .setDescription(out)
-                    .setColor('#f5e042')
-                message.channel.send(inventoryMessage)
-                console.log(keys)
-                break;
             
-            case 'equip':
-                if(!args[0]) return message.channel.send("Please select an item")
-                channel.send(args[0])
-                if(!test.inventory[args[0]]) return message.channel.send("You don't have this item")
-                channel.send(args[1])
-                if(!args[1]||isNaN(args[1])){ numberequip = 1}
-                else{numberequip = args[1]};
-                test["equipped"+numberequip] = args[0]
-                fs.writeFile ("./test.json", JSON.stringify(test,null,4), err => {
-                    if (err) throw err;
-                });
-                //fs.writefile (".test.json", JSON.stringify(test,null,4), err => { if(err) throw err; });
-                
-                /*let item3 = args[0]
-                channel.send(item3)
-                let numberequip = args[1]
-                if(Object.keys(item3).length === 0 || item3 === null) {
-                    channel.send("please select an item!")
-                    break;
-                };
-                if (!test.inventory[item3]){
-                    channel.send("You don't have this item!")
-                    break;
-                };
-                if (Object.keys(numberequip).length === 0 || isNaN(numberequip)){
-                    numberequip = 1
-                };
-                item2equip = args[0]
-                test["equipped"+numberequip] = item2equip
-                fs.writeFile (".test.json", JSON.stringify(test,null,4), err => {
-                    if (err) throw err;
-                });*/
-                break;
-
-            case 'toychallenge':
-                if (test.equipped1 === "(None)" && test.equipped2==="(None)"){
-                    channel.send("You need to equip an item to complete the challenge!")
-                    break;
-                };
-                itemName1 = test.equipped1
-                itemName2 = test.equipped2
-                if(test.equipped2==="(None)"){
-                    power1 = parseInt(test.inventory[itemName1].Power)
-                    if (power1> 20) {
-                        channel.send("You won the challenge!")
-                        break;
-                    };
-                    channel.send("You lost!")
-
-                }
-                else{
-                    power1 = parseInt(test.inventory[itemName1].Power)
-                    power2 = parseInt(test.inventory[itemName2].Power)
-                    power = parseInt(power1 + power2)
-                    channel.send("Item one has "+power1+" power points, item two has "+ power2+" power points, for a total of "+power+" points.")
-                    if (power> 20) {
-                        channel.send("You won the challenge! You had more than 20 power points!")
-                        break;
-                    };
-                    channel.send("You lost!")
-
-                }
-            case 'equipped':
-                channel.send("1: "+test.equipped1 +" 2: "+ test.equipped2)
-                
-
-            
-            case 'add':
-                item = message.content.slice(6)
-                array2.push(item)
-            //channel.send(array.length)
-            //channel.send(array[0])
-                console.log(message.mentions.users == null);
-                console.log(message.mentions.users.first());
-                console.log(message.mentions.users.first() == null);
-                break;
-            default:
 
         }
 
@@ -437,10 +334,8 @@ function caraVanRaid (message) {
     rn = Math.random() * 100
     winnerVar0 = parseInt(challenger + caraCookie)
     winnerVar = parseInt(challenger / winnerVar0 * 100)
-    message.channel.send(math1+" is how many coins you have + 25percent. "+caraCarry+" is how many coins the caravan has. "+math2+" is how many cookies you have + 25percent. "+caraCookie+" is how many cookies the caravan has. "+rn+" is the random number to beat. "+winnerVar+" is the percent chance you have of winning.")
     //message.channel.send(winnerVar.toFixed(3))
     if (winnerVar > rn) { //sender won
-        message.channel.send("Win")
         sender = message.author.id
         caraMessageVictory = new Discord.MessageEmbed ()
             .setAuthor('COOKIE CARAVAN')
@@ -465,7 +360,6 @@ function caraVanRaid (message) {
 
     }
     if (winnerVar < rn){
-        message.channel.send("lose")
         caraMessageLoss = new Discord.MessageEmbed ()
             .setAuthor('COOKIE CARAVAN')
             .setDescription('**<@'+message.author.id+'> the battle was brutal.. cookies crumbled...\nYou failed to raid the caravan and missed out on '+caraCarry+' coins from the caravan! D:**')
@@ -507,7 +401,6 @@ function displayShop(message, cookiePrice, tonkPrice, tapePrice, armPrice) {
         .setColor('#f5e042')
         message.channel.send(shopMessage)
 }
-//purchaseItem(message,args.pop(),{name: 'Cookie', cost: parseInt(cookiePrice), dn: 'cookie'});
 function purchaseItem(message, args, item) {
     console.log(3.0);
     ensureUserInDB(message.author);
